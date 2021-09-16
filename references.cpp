@@ -37,10 +37,24 @@ void foo(Payload &&p) { // rvalue arguments will select this function
 
 int main() {
   Payload payloadd{'o', 17, 'c', 91, true, "OzdincCelikel"};
+  // Payload &payloadRef = Payload{'s', 88, 's', 88, true, "SSSsssSSS"};
+  // initial value of reference to non-const must be an lvalue
+  Payload payloadS{'s', 88, 's', 88, true, "SSSsssSSS"};
   Payload &&refref = std::move(payloadd);
+  // A named rvalue is an lvalue as all named objects are lvalues
   bar(refref);
   baz(refref);
   // foo(refref);
+  // an rvalue reference cannot be bound to an lvalue
+  std::cout << "================================================\n";
+  bar(payloadS);
+  baz(payloadS);
+  // foo(payloadS);
+  // an rvalue reference cannot be bound to an lvalue
+  Payload &payloadRef = payloadS;
+  bar(payloadRef);
+  baz(payloadRef);
+  // foo(payloadRef);
   // an rvalue reference cannot be bound to an lvalue
   std::cout << "================================================\n";
   bar(Payload{'s', 41, 'a', 93, true, "SimgeAlkin"});
