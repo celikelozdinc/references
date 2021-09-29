@@ -1,6 +1,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <vector>
 
 struct Payload {
   char c;
@@ -35,6 +36,35 @@ void foo(Payload &&p) { // rvalue arguments will select this function
   std::cout << "Accepts rvalue reference as an argument.\n";
 }
 
+class Package {
+public:
+  Package() {
+    vec.reserve(3);
+    vec.emplace_back(10);
+    vec.emplace_back(8);
+    vec.emplace_back(6);
+  }
+
+  const int &get_first() { return vec.at(0); }
+
+  const int &get_second() { return vec.at(1); }
+
+  const int &get_third() { return vec.at(2); }
+
+  int *get_int_ptr() { return &vec.at(0); }
+
+  void print() noexcept {
+    std::cout << "*******START PRINTING PACKAGE ****\n";
+    for (int i = 0; i < 3; i++) {
+      std::cout << i << "=>" << vec.at(i) << "\n";
+    }
+    std::cout << "*******END PRINTING PACKAGE****\n";
+  }
+
+private:
+  std::vector<int> vec;
+};
+
 int main() {
   Payload payloadd{'o', 17, 'c', 91, true, "OzdincCelikel"};
   // Payload &payloadRef = Payload{'s', 88, 's', 88, true, "SSSsssSSS"};
@@ -68,5 +98,19 @@ int main() {
   // initial value of reference to non-const must be an lvalue
   foo(std::move(payloadd));
   std::cout << "================================================\n";
+  std::cout << "================================================\n";
+  std::cout << "================================================\n";
+
+  auto pkg = Package();
+  // pkg.get_first() = 88; //assignment of read-only location
+  auto i = pkg.get_first();
+  std::cout << i << "\n";
+  pkg.print();
+  i = -10;
+  std::cout << i << "\n";
+  pkg.print();
+  const int &second = pkg.get_second();
+  std::cout << second << "\n";
+  // second = pkg.get_third(); //assignment of read-only reference ‘second
   return 0;
 }
