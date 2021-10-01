@@ -7,6 +7,12 @@
 # LVALUE REFERENCE
 + A reference that `binds to an lvalue`, lvalue reference is marked with a single ampersand (*&*).
 
+# std::move()
+Returning by *`std::move`* is a commonly known C++ antipattern:
+
++ it disables (N)RVO ((Named-)Return-Value-Optimization) meaning that copy elision is not happening
++ it makes our code redundant as move will happen even without explicitly calling *`std::move`*
+
 # Compile & Run
 ```bash
 g++ references.cpp -o references ; ./$_
@@ -18,3 +24,5 @@ g++ references.cpp -o references ; ./references
 [Rvalue references in C++](https://medium.com/pranayaggarwal25/rvalue-references-e99dfd3933ff)
 
 [reference-to-const](https://medium.com/@vgasparyan1995/pass-by-value-vs-pass-by-reference-to-const-c-f8944171e3ce)
+
+[Antipattern](https://github.com/m-peko/craft-cpp/blob/master/_posts/2021-09-28-when-is-an-antipattern-not-an-antipattern.md)
