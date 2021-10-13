@@ -98,9 +98,29 @@ int main() {
   // initial value of reference to non-const must be an lvalue
   foo(std::move(payloadd));
   std::cout << "================================================\n";
-  std::cout << "================================================\n";
-  std::cout << "================================================\n";
 
+  int x = 20, y = 40; // x and y are our referent
+  int &firstRef = x;
+  std::cout << "Address of x : " << &x << ", Value of x : " << x << "\n";
+  std::cout << "Address of y : " << &y << ", Value of y : " << y << "\n";
+  std::cout << "Address of firstRef : " << &firstRef
+            << ", Value of firstRef : " << firstRef << "\n";
+
+  firstRef = y;
+
+  std::cout << "Address of x : " << &x << ", Value of x : " << x << "\n";
+  std::cout << "Address of y : " << &y << ", Value of y : " << y << "\n";
+  std::cout << "Address of firstRef : " << &firstRef
+            << ", Value of firstRef : " << firstRef << "\n";
+
+  firstRef = 80;
+
+  std::cout << "Address of x : " << &x << ", Value of x : " << x << "\n";
+  std::cout << "Address of y : " << &y << ", Value of y : " << y << "\n";
+  std::cout << "Address of firstRef : " << &firstRef
+            << ", Value of firstRef : " << firstRef << "\n";
+
+  std::cout << "================================================\n";
   auto pkg = Package();
   // pkg.get_first() = 88; //assignment of read-only location
   auto i = pkg.get_first();
@@ -112,5 +132,6 @@ int main() {
   const int &second = pkg.get_second();
   std::cout << second << "\n";
   // second = pkg.get_third(); //assignment of read-only reference ‘second
+  std::cout << "================================================\n";
   return 0;
 }
