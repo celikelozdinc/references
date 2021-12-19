@@ -12,6 +12,11 @@ struct Payload {
   std::string s;
 } Str;
 
+/**
+ * @brief Pass-By-Value
+ * 
+ * @param p 
+ */
 void bar(Payload p) {
   std::cout << "bar()::Got \"Payload\" by value\n";
   std::cout << p.c << "\n";
@@ -22,6 +27,11 @@ void bar(Payload p) {
   std::cout << p.s << "\n";
 }
 
+/**
+ * @brief Pass-By-Reference
+ * 
+ * @param p 
+ */
 void baz(Payload &p) {
   std::cout << "baz()::Got \"Payload\" by reference\n";
   std::cout << p.c << "\n";
@@ -97,6 +107,11 @@ int main() {
   // baz(std::move(payloadd));
   // initial value of reference to non-const must be an lvalue
   foo(std::move(payloadd));
+  std::cout << "================================================\n";
+  // baz(Payload{});
+  // initial value of reference to non-const must be an lvalue
+  foo(Payload{});  //=> Payload&& p = Payload{};
+  // we can reference and rvalue with &&
   std::cout << "================================================\n";
 
   int x = 20, y = 40; // x and y are our referent

@@ -3,6 +3,7 @@
     - std::move is used to `convert to rvalue reference`, it is exactly equivalent to a *static_cast to an rvalue reference*.
 + A named rvalue is an lvalue as all Named objects are lvalues
 + Rvalue references _can only bind_ to Rvalues
++ We can `reference` an r-value with _&&_
 
 # LVALUE REFERENCE
 + A reference that `binds to an lvalue`, lvalue reference is marked with a single ampersand (*&*).
@@ -26,3 +27,5 @@ g++ references.cpp -o references ; ./references
 [reference-to-const](https://medium.com/@vgasparyan1995/pass-by-value-vs-pass-by-reference-to-const-c-f8944171e3ce)
 
 [Antipattern](https://github.com/m-peko/craft-cpp/blob/master/_posts/2021-09-28-when-is-an-antipattern-not-an-antipattern.md)
+
+[Few Modern Syntax](https://medium.com/@daloukalai/a-few-modern-c-syntax-you-must-adapt-part-ii-3bc840450667)
