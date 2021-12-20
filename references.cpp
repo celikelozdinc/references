@@ -42,6 +42,11 @@ void baz(Payload &p) {
   std::cout << p.s << "\n";
 }
 
+void foo(const Payload& p) {
+  std::cout << "Accepts const lvalue reference as an argument.\n";
+}
+
+
 void foo(Payload &&p) { // rvalue arguments will select this function
   std::cout << "Accepts rvalue reference as an argument.\n";
 }
